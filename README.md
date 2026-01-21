@@ -90,7 +90,7 @@ Choose a directory where you want to clone this repository.
 
 ### Step 8: Clone the repository
 ```bash
-git clone [<REPOSITORY_LINK>](https://github.com/Puaison/Planning_and_Reasoning_Project.git)
+git clone https://github.com/Puaison/Planning_and_Reasoning_Project.git
 ```
 ---
 
