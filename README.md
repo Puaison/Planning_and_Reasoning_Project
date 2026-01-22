@@ -82,8 +82,6 @@ sudo chmod +x /usr/local/bin/enhsp
 
 You can now run ENHSP from any directory using the `enhsp` command.
 
-## Running the Planner
-
 ---
 
 ## Requirements for FastDownward
