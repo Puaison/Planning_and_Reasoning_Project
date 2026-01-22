@@ -2242,12 +2242,12 @@
 	(= (battery_level r2) 4)
 	(= (battery_level r3) 4)
 	(= (battery_level r4) 4)
-        (= (necessary_battery_level) 1)
+        (= (necessary_battery_level) 0)
         (= (max_battery_level) 4)
 	
 )
 
-(:goal(and(robot_at r1 c58)))
+(:goal(and(robot_at r1 c43)))
 (:metric minimize (total-cost))
 
 )
