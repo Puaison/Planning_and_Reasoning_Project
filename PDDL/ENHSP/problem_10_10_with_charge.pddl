@@ -1,9 +1,19 @@
-(define (problem tre)
-    (:domain ricochet_robot)
+(define (problem two)
+    (:domain ricochet_robot_enhsp_with_charge)
     (:objects
         r1 r2 r3 r4 - robot
-        ; Grid cells
-        c11 c12 c13 c14 c15 c16 c17 c18 c19 c110 c21 c22 c23 c24 c25 c26 c27 c28 c29 c210 c31 c32 c33 c34 c35 c36 c37 c38 c39 c310 c41 c42 c43 c44 c45 c46 c47 c48 c49 c410 c51 c52 c53 c54 c55 c56 c57 c58 c59 c510 c61 c62 c63 c64 c65 c66 c67 c68 c69 c610 c71 c72 c73 c74 c75 c76 c77 c78 c79 c710 c81 c82 c83 c84 c85 c86 c87 c88 c89 c810 c91 c92 c93 c94 c95 c96 c97 c98 c99 c910 c101 c102 c103 c104 c105 c106 c107 c108 c109 c1010 - cell
+        ; Grid cells cij, where i is row index and j is column index
+        c11 c12 c13 c14 c15 c16 c17 c18 c19 c110
+        c21 c22 c23 c24 c25 c26 c27 c28 c29 c210
+        c31 c32 c33 c34 c35 c36 c37 c38 c39 c310
+        c41 c42 c43 c44 c45 c46 c47 c48 c49 c410
+        c51 c52 c53 c54 c55 c56 c57 c58 c59 c510
+        c61 c62 c63 c64 c65 c66 c67 c68 c69 c610
+        c71 c72 c73 c74 c75 c76 c77 c78 c79 c710
+        c81 c82 c83 c84 c85 c86 c87 c88 c89 c810
+        c91 c92 c93 c94 c95 c96 c97 c98 c99 c910
+        c101 c102 c103 c104 c105 c106 c107 c108 c109 c1010
+        - cell
     )
 
     (:init
@@ -415,7 +425,7 @@
         (cell_adj_to_the_right_of c109 c1010)
         (cell_adj_to_the_left_of c1010 c109)
 
-        ; Horizontal alignments (same row)
+        ; Horizontal ordering in each row
         (cell_aligned_to_the_right_of c11 c12)
         (cell_aligned_to_the_right_of c11 c13)
         (cell_aligned_to_the_right_of c11 c14)
@@ -1317,7 +1327,7 @@
         (cell_aligned_to_the_left_of c1010 c108)
         (cell_aligned_to_the_left_of c1010 c109)
 
-        ; Vertical alignments (same column)
+        ; Vertical ordering in each column
         (cell_aligned_to_the_bottom_of c11 c21)
         (cell_aligned_to_the_bottom_of c11 c31)
         (cell_aligned_to_the_bottom_of c11 c41)
@@ -2218,6 +2228,10 @@
         (cell_aligned_to_the_top_of c1010 c710)
         (cell_aligned_to_the_top_of c1010 c810)
         (cell_aligned_to_the_top_of c1010 c910)
+
+        ;;
+        ;;      CUSTOM CONFIGURATION OF THE GRID AND ROBOTS
+        ;;
         (robot_at r1 c11)
         (robot_at r2 c22)
         (robot_at r3 c87)
@@ -2246,17 +2260,25 @@
         (wall_to_the_left_of c34)(wall_to_the_right_of c33)
         (wall_to_the_bottom_of c33)(wall_to_the_top_of c43)
 
+        (= (battery_level r1) 6)
+        (= (battery_level r2) 4)
+        (= (battery_level r3) 4)
+        (= (battery_level r4) 4)
+        (= (necessary_battery_level) 0)
+        (= (max_battery_level) 6)
+
         (visited r1 c11)
         (visited r2 c22)
         (visited r3 c87)
         (visited r4 c73)
 
-        ;(visit_before r1 c33 c43)
-        ;(visit_before r1 c43 c1010)
+        (visit_before r1 c33 c43)
+        (visit_before r1 c43 c1010)
+        (charging_station_cell c11)
 
     )
 
-    (:goal(and(visited r1 c43)(visited r1 c33)(visited r1 c1010)(visited r1 c58))
+    (:goal(and(visited r1 c43)(visited r1 c33)(visited r1 c1010))
     )
     (:metric minimize
         (total-cost)

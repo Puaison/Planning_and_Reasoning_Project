@@ -1,5 +1,5 @@
 (define (problem uno)
-        (:domain ricochet_robot)
+        (:domain ricochet_robot_fastdownward_no_charge)
         (:objects
                 r1 r2 - robot
                 c1 c2 c3 c4 c5 - cell
