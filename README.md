@@ -174,15 +174,15 @@ cd Planning_and_Reasoning_Project/PDDL
 
 ---
 
-## Running the Planners
+## Running the Planners on our domains and problems
 
-### Run ENHSP on the PDDL files
+### Run ENHSP on the PDDL files in the ENHSP folder
 ```bash
-enhsp -o domain_2_rico.pddl -f problem_2_3_rico.pddl -planner opt-hmax
+enhsp -o domain_multiple_goal_with_charge.pddl -f problem_10_10_with_charge.pddl -planner opt-hmax
 ```
-### Run FastDownward on the PDDL files
+### Run FastDownward on the PDDL files in the FastDownward folder
 ```bash
-downward domain_1_rico.pddl problem_1_3_rico.pddl --search "astar(hmax())"
+downward domain_multiple_goal_no_charge.pddl problem_10_10_no_charge.pddl --search "astar(hmax())"
 ```
 
 
