@@ -5,7 +5,7 @@ The project supports different planners, with a more complete modeling designed 
 
 ---
 
-## Requirements
+## Requirements for ENHSP
 
 - **Operating System**: Linux (tested on Ubuntu 24.04 LTS)
 - **Java**: OpenJDK (version 11 or newer recommended)
@@ -84,6 +84,79 @@ You can now run ENHSP from any directory using the `enhsp` command.
 
 ---
 
+## Requirements for FastDownward
+
+- **Operating System**: Linux (tested on Ubuntu 24.04 LTS)
+- **C++ Compiler**
+- **CMake**
+- **Python3**
+
+If something is missing, run this command:
+```bash
+sudo apt update
+sudo apt install cmake g++ make python3
+```
+
+---
+
+
+### Step 1: Clone FastDownward
+```bash
+git clone https://github.com/aibasel/downward.git
+```
+
+### Step 2: Enter the FastDownward directory
+```bash
+cd downward
+```
+
+### Step 3: Compile FastDownward
+```bash
+./build.py
+```
+
+After compilation, the file `fast-downward.py` can be runnable inside the downward directory.
+
+---
+
+## Making FastDownward Executable from Anywhere
+
+To run FastDownward from any directory, create a system-wide command.
+
+### Step 4: Get the absolute path to `fast-downward.py`
+
+Example:
+```text
+/home/your_username/downward/fast-downward.py
+```
+
+---
+
+### Step 5: Create a wrapper script
+Open a new terminal and run:
+```bash
+sudo nano /usr/local/bin/downward
+```
+
+### Step 6: Add the following content
+```bash
+#!/bin/bash
+/path/to/fast-downward.py "$@"
+```
+
+Replace `/path/to/fast-downward.py` with the actual absolute path.
+
+---
+
+### Step 7: Make the script executable
+```bash
+sudo chmod +x /usr/local/bin/downward
+```
+
+You can now run FastDownward from any directory using the `downward` command.
+
+---
+
 ## Installing This Project
 
 Choose a directory where you want to clone this repository.
@@ -101,28 +174,21 @@ cd Planning_and_Reasoning_Project/PDDL
 
 ---
 
-## Running the Planner
+## Running the Planners
 
-### Step 10: Run ENHSP on the PDDL files
+### Run ENHSP on the PDDL files
 ```bash
 enhsp -o domain_2_rico.pddl -f problem_2_3_rico.pddl -planner opt-hmax
 ```
+### Run FastDownward on the PDDL files
+```bash
+downward domain_1_rico.pddl problem_1_3_rico.pddl --search "astar(hmax())"
+```
+
 
 ---
 
 ## Notes on PDDL Domains and Planners
-
-### Fast Downward Domains
-
-- `domain_1_rico.pddl`
-- `problem_1_x_rico.pddl`
-
-These files:
-- Can be run **only with Fast Downward**
-- Represent a **simpler modeling** of the problem
-- Support **A\*** search with both **hmax** and **hadd** heuristics
-
----
 
 ### ENHSP Domains
 
@@ -138,9 +204,21 @@ These domains:
 
 ---
 
+### Fast Downward Domains
+
+- `domain_1_rico.pddl`
+- `problem_1_x_rico.pddl`
+
+These files:
+- Can be run **only with Fast Downward**
+- Represent a **simpler modeling** of the problem
+- Support **A\*** search with both **hmax** and **hadd** heuristics
+
+---
+
 ## Heuristics and Search Strategies in ENHSP
 
-Default heuristic:
+To use **hmax**:
 ```bash
 -planner opt-hmax
 ```
@@ -148,6 +226,18 @@ Default heuristic:
 To use **hadd**:
 ```bash
 -planner sat-hadd
+```
+
+## Heuristics and Search Strategies in FastDownward
+
+To use **hmax**:
+```bash
+"astar(hmax())"
+```
+
+To use **hadd**:
+```bash
+"astar(add())"
 ```
 
 ### Important Notes
