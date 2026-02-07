@@ -1,7 +1,7 @@
 (define (problem four)
-    (:domain ricochet_robot_fastdownward_no_charge)
+    (:domain ricochet_robot_fastdownward_no_charge_modified)
     (:objects
-        r1 r2 r3 r4 - robot
+        red black blue green - robot
         ; Grid cells cij, where i is row index and j is column index
         c_1_1 c_1_2 c_1_3 c_1_4 c_1_5 c_1_6 c_1_7 c_1_8 c_1_9 c_1_10 c_1_11 c_1_12 c_1_13 c_1_14 c_1_15 c_1_16
         c_2_1 c_2_2 c_2_3 c_2_4 c_2_5 c_2_6 c_2_7 c_2_8 c_2_9 c_2_10 c_2_11 c_2_12 c_2_13 c_2_14 c_2_15 c_2_16
@@ -8741,10 +8741,10 @@
         ;;
         ;;      CUSTOM CONFIGURATION OF THE GRID AND ROBOTS
         ;;
-        (robot_at r1 c_1_1)
-        (robot_at r2 c_2_2)
-        (robot_at r3 c_8_7)
-        (robot_at r4 c_7_3)
+        (robot_at red c_1_1)
+        (robot_at black c_2_2)
+        (robot_at blue c_8_7)
+        (robot_at green c_7_3)
 
         (occupied c_1_1)
         (occupied c_2_2)
@@ -8772,12 +8772,170 @@
         (wall_to_the_bottom_of c_3_3)
         (wall_to_the_top_of c_4_3)
 
-        (visited r1 c_1_1)
-        (visited r2 c_2_2)
-        (visited r3 c_8_7)
-        (visited r4 c_7_3)
+        (visited red c_1_1)
+        (visited black c_2_2)
+        (visited blue c_8_7)
+        (visited green c_7_3)
+
+        ; ;;
+        ; ;;      RANDOM INTERNAL WALLS (mutual)
+        ; ;;
+
+        ; ; Horizontal walls
+        ; (wall_to_the_right_of c_2_5)
+        ; (wall_to_the_left_of  c_2_6)
+
+        ; (wall_to_the_right_of c_4_9)
+        ; (wall_to_the_left_of  c_4_10)
+
+        ; (wall_to_the_right_of c_7_3)
+        ; (wall_to_the_left_of  c_7_4)
+
+        ; (wall_to_the_right_of c_10_12)
+        ; (wall_to_the_left_of  c_10_13)
+
+        ; (wall_to_the_right_of c_14_6)
+        ; (wall_to_the_left_of  c_14_7)
+
+        ; ; Vertical walls
+        ; (wall_to_the_bottom_of c_3_8)
+        ; (wall_to_the_top_of    c_4_8)
+
+        ; (wall_to_the_bottom_of c_5_11)
+        ; (wall_to_the_top_of    c_6_11)
+
+        ; (wall_to_the_bottom_of c_8_4)
+        ; (wall_to_the_top_of    c_9_4)
+
+        ; (wall_to_the_bottom_of c_11_14)
+        ; (wall_to_the_top_of    c_12_14)
+
+        ; (wall_to_the_bottom_of c_13_2)
+        ; (wall_to_the_top_of    c_14_2)
+
+        ; ; ----------------------------
+        ; ; RANDOM INTERNAL WALLS (mutual) - +15
+        ; ; ----------------------------
+
+        ; ; Horizontal walls
+        ; (wall_to_the_right_of c_1_4)
+        ; (wall_to_the_left_of  c_1_5)
+
+        ; (wall_to_the_right_of c_3_12)
+        ; (wall_to_the_left_of  c_3_13)
+
+        ; (wall_to_the_right_of c_5_8)
+        ; (wall_to_the_left_of  c_5_9)
+
+        ; (wall_to_the_right_of c_6_2)
+        ; (wall_to_the_left_of  c_6_3)
+
+        ; (wall_to_the_right_of c_9_15)
+        ; (wall_to_the_left_of  c_9_16)
+
+        ; (wall_to_the_right_of c_12_7)
+        ; (wall_to_the_left_of  c_12_8)
+
+        ; ; Vertical walls
+        ; (wall_to_the_bottom_of c_2_10)
+        ; (wall_to_the_top_of    c_3_10)
+
+        ; (wall_to_the_bottom_of c_4_1)
+        ; (wall_to_the_top_of    c_5_1)
+
+        ; (wall_to_the_bottom_of c_7_14)
+        ; (wall_to_the_top_of    c_8_14)
+
+        ; (wall_to_the_bottom_of c_10_6)
+        ; (wall_to_the_top_of    c_11_6)
+
+        ; (wall_to_the_bottom_of c_15_9)
+        ; (wall_to_the_top_of    c_16_9)
+
+        ; ; ----------------------------
+        ; ; RANDOM INTERNAL WALLS (mutual) - +22
+        ; ; ----------------------------
+
+        ; ; Horizontal walls
+        ; (wall_to_the_right_of c_1_9)
+        ; (wall_to_the_left_of  c_1_10)
+
+        ; (wall_to_the_right_of c_2_4)
+        ; (wall_to_the_left_of  c_2_5)
+
+        ; (wall_to_the_right_of c_3_1)
+        ; (wall_to_the_left_of  c_3_2)
+
+        ; (wall_to_the_right_of c_4_12)
+        ; (wall_to_the_left_of  c_4_13)
+
+        ; (wall_to_the_right_of c_5_15)
+        ; (wall_to_the_left_of  c_5_16)
+
+        ; (wall_to_the_right_of c_6_10)
+        ; (wall_to_the_left_of  c_6_11)
+
+        ; (wall_to_the_right_of c_7_7)
+        ; (wall_to_the_left_of  c_7_8)
+
+        ; (wall_to_the_right_of c_8_3)
+        ; (wall_to_the_left_of  c_8_4)
+
+        ; (wall_to_the_right_of c_9_6)
+        ; (wall_to_the_left_of  c_9_7)
+
+        ; (wall_to_the_right_of c_10_14)
+        ; (wall_to_the_left_of  c_10_15)
+
+        ; (wall_to_the_right_of c_11_11)
+        ; (wall_to_the_left_of  c_11_12)
+
+        ; (wall_to_the_right_of c_13_2)
+        ; (wall_to_the_left_of  c_13_3)
+
+        ; ; Vertical walls
+        ; (wall_to_the_bottom_of c_2_2)
+        ; (wall_to_the_top_of    c_3_2)
+
+        ; (wall_to_the_bottom_of c_4_6)
+        ; (wall_to_the_top_of    c_5_6)
+
+        ; (wall_to_the_bottom_of c_6_13)
+        ; (wall_to_the_top_of    c_7_13)
+
+        ; (wall_to_the_bottom_of c_8_11)
+        ; (wall_to_the_top_of    c_9_11)
+
+        ; (wall_to_the_bottom_of c_10_3)
+        ; (wall_to_the_top_of    c_11_3)
+
+        ; (wall_to_the_bottom_of c_12_9)
+        ; (wall_to_the_top_of    c_13_9)
+
+        ; (wall_to_the_bottom_of c_14_16)
+        ; (wall_to_the_top_of    c_15_16)
+
+        ; ; ----------------------------
+        ; ; RANDOM INTERNAL WALLS (mutual) - +4
+        ; ; ----------------------------
+
+        ; (wall_to_the_right_of c_14_5)
+        ; (wall_to_the_left_of  c_14_6)
+
+        ; (wall_to_the_bottom_of c_8_8)
+        ; (wall_to_the_top_of    c_9_8)
+
+        ; (wall_to_the_right_of c_12_12)
+        ; (wall_to_the_left_of  c_12_13)
+
+        ; (wall_to_the_bottom_of c_1_3)
+        ; (wall_to_the_top_of    c_2_3)
+
+
+
+
     )
-    (:goal(and(visited r1 c_4_3)(visited r1 c_3_3)(visited r1 c_16_16)) ; c58
+    (:goal(and(visited red c_5_8)) ; c58
     )
     (:metric minimize
         (total-cost)

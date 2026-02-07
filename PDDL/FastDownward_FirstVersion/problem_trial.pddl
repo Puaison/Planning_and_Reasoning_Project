@@ -1,7 +1,7 @@
 (define (problem uno)
         (:domain ricochet_robot_fastdownward_no_charge)
         (:objects
-                r1 r2 - robot
+                red black - robot
                 c1 c2 c3 c4 c5 - cell
         )
 
@@ -40,16 +40,16 @@
                 (cell_aligned_to_the_top_of c5 c4)
                 (cell_aligned_to_the_bottom_of c4 c5)
 
-                (robot_at r1 c2)
-                (= (battery_level r1) 10)
+                (robot_at red c2)
+                (= (battery_level red) 10)
                 (= (necessary_battery_level) 1)
                 (= (max_battery_level) 10)
                 (occupied c2)
-                (robot_at r2 c4)
+                (robot_at black c4)
                 (occupied c4)
 
         )
 
-        (:goal(and(robot_at r1 c4))
+        (:goal(and(robot_at red c4))
         )
 )

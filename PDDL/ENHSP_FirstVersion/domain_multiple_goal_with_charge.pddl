@@ -1,4 +1,4 @@
-(define (domain ricochet_robot_enhsp_with_charge)
+(define (domain ricochet_robot_enhsp_with_charge_first_version)
 
   (:requirements :numeric-fluents :adl :equality :typing
   )

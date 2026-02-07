@@ -1,7 +1,7 @@
-(define (problem two)
-    (:domain ricochet_robot_enhsp_with_charge)
+(define (problem problem_10_10_multiple_goals_with_order_with_charge)
+    (:domain ricochet_robot_enhsp_with_charge_first_version)
     (:objects
-        r1 r2 r3 r4 - robot
+        red black blue green - robot
         ; Grid cells cij, where i is row index and j is column index
         c11 c12 c13 c14 c15 c16 c17 c18 c19 c110
         c21 c22 c23 c24 c25 c26 c27 c28 c29 c210
@@ -2232,10 +2232,10 @@
         ;;
         ;;      CUSTOM CONFIGURATION OF THE GRID AND ROBOTS
         ;;
-        (robot_at r1 c11)
-        (robot_at r2 c22)
-        (robot_at r3 c87)
-        (robot_at r4 c73)
+        (robot_at red c11)
+        (robot_at black c22)
+        (robot_at blue c87)
+        (robot_at green c73)
         (occupied c11)
         (occupied c22)
         (occupied c87)
@@ -2260,25 +2260,25 @@
         (wall_to_the_left_of c34)(wall_to_the_right_of c33)
         (wall_to_the_bottom_of c33)(wall_to_the_top_of c43)
 
-        (= (battery_level r1) 6)
-        (= (battery_level r2) 4)
-        (= (battery_level r3) 4)
-        (= (battery_level r4) 4)
+        (= (battery_level red) 6)
+        (= (battery_level black) 4)
+        (= (battery_level blue) 4)
+        (= (battery_level green) 4)
         (= (necessary_battery_level) 0)
         (= (max_battery_level) 6)
 
-        (visited r1 c11)
-        (visited r2 c22)
-        (visited r3 c87)
-        (visited r4 c73)
+        (visited red c11)
+        (visited black c22)
+        (visited blue c87)
+        (visited green c73)
 
-        (visit_before r1 c33 c43)
-        (visit_before r1 c43 c1010)
+        (visit_before red c33 c43)
+        (visit_before red c43 c1010)
         (charging_station_cell c11)
 
     )
 
-    (:goal(and(visited r1 c43)(visited r1 c33)(visited r1 c1010))
+    (:goal(and(visited red c43)(visited red c33)(visited red c1010))
     )
     (:metric minimize
         (total-cost)

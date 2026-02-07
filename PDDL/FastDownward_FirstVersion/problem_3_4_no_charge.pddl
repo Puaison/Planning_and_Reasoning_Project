@@ -1,7 +1,7 @@
 (define (problem due)
 	(:domain ricochet_robot_fastdownward_no_charge)
 	(:objects
-		r1 r2 - robot
+		red black - robot
 		; Grid cells cij, where i is row index and j is coloumn index
 		c11 c12 c13 c14 c21 c22 c23 c24 c31 c32 c33 c34 - cell
 	)
@@ -131,14 +131,14 @@
 		;;      CUSTOM CONFIGURATION OF THE GRID AND ROBOTS
 		;;
 
-		(robot_at r1 c11)
+		(robot_at red c11)
 		(occupied c11)
-		(robot_at r2 c21)
+		(robot_at black c21)
 		(occupied c21)
 
 	)
 
-	(:goal(and(robot_at r1 c31))
+	(:goal(and(robot_at red c31))
 	)
 	(:metric minimize
 		(total-cost)
