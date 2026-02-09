@@ -21,9 +21,7 @@
     (cell_adj_to_the_left_of ?c1 - cell ?c2 - cell) ;cell c2 is on the left side of cell c1 and they are adjacent
 
     (cell_between_row_of ?c1 - cell ?c2 - cell ?cb - cell);cell cb is between cell c1 and cell c3 in the same row or column
-    (cells_on_same_row ?c1 - cell ?c2 - cell)
     (cell_between_column_of ?c1 - cell ?c2 - cell ?cb - cell);cell cb is between cell c1 and cell c3 in the same column
-    (cells_on_same_column ?c1 - cell ?c2 - cell)
 
     (visited ?r - robot ?c - cell) ;Robot r has visited cell c
     (visit_before ?r - robot ?c1 - cell ?c2 - cell) ;Robot r has to visit cell c1 before reaching cell c2
@@ -57,10 +55,17 @@
       (not (wall_to_the_right_of ?from))
 
       (and ;the path between the cells "?from" and "?to" is free from any type of obstacle
-        (or
-          (cells_on_same_row ?from ?to)
-          (cells_on_same_row ?to ?from)
+        (or ;This block controls that the cells "?from" and "?to" are in the same row
+        (cell_adj_to_the_right_of ?from ?to) ;If "?from" and "?to" are adjacent left or right, they are in the same row
+        (cell_adj_to_the_left_of ?from ?to) 
+        (exists ;If there is a cell "?c" that is between "?from" and "?to" in the same row, then "?from" and "?to" are in the same row
+          (?c - cell)
+          (or
+            (cell_between_row_of ?from ?to ?c)
+            (cell_between_row_of ?to ?from ?c)
+          )
         )
+      )
         (not (= ?from ?to))
         (forall
           (?c - cell)
@@ -116,10 +121,17 @@
       (not (wall_to_the_left_of ?from))
 
       (and ;the path between the cells "?from" and "?to" is free from any type of obstacle
-        (or
-          (cells_on_same_row ?from ?to)
-          (cells_on_same_row ?to ?from)
+        (or ;This block controls that the cells "?from" and "?to" are in the same row
+        (cell_adj_to_the_right_of ?from ?to) ;If "?from" and "?to" are adjacent left or right, they are in the same row
+        (cell_adj_to_the_left_of ?from ?to) 
+        (exists ;If there is a cell "?c" that is between "?from" and "?to" in the same row, then "?from" and "?to" are in the same row
+          (?c - cell)
+          (or
+            (cell_between_row_of ?from ?to ?c)
+            (cell_between_row_of ?to ?from ?c)
+          )
         )
+      )
         (not (= ?from ?to))
         (forall
           (?c - cell)
@@ -176,10 +188,17 @@
       (not (wall_to_the_top_of ?from))
 
       (and ;the path between the cells "?from" and "?to" is free from any type of obstacle
-        (or
-          (cells_on_same_column ?from ?to)
-          (cells_on_same_column ?to ?from)
+        (or ;This block controls that the cells "?from" and "?to" are in the same column
+        (cell_adj_to_the_top_of ?from ?to) ;If "?from" and "?to" are adjacent top or bottom, they are in the same column
+        (cell_adj_to_the_bottom_of ?from ?to)
+        (exists ;If there is a cell "?c" that is between "?from" and "?to" in the same column, then "?from" and "?to" are in the same column
+          (?c - cell)
+          (or
+            (cell_between_column_of ?from ?to ?c)
+            (cell_between_column_of ?to ?from ?c)
+          )
         )
+      )
         (not (= ?from ?to))
         (forall
           (?c - cell)
@@ -236,10 +255,17 @@
       (not (wall_to_the_bottom_of ?from))    
 
       (and ;the path between the cells "?from" and "?to" is free from any type of obstacle
-        (or
-          (cells_on_same_column ?from ?to)
-          (cells_on_same_column ?to ?from)
+        (or ;This block controls that the cells "?from" and "?to" are in the same column
+        (cell_adj_to_the_top_of ?from ?to) ;If "?from" and "?to" are adjacent top or bottom, they are in the same column
+        (cell_adj_to_the_bottom_of ?from ?to)
+        (exists ;If there is a cell "?c" that is between "?from" and "?to" in the same column, then "?from" and "?to" are in the same column
+          (?c - cell)
+          (or
+            (cell_between_column_of ?from ?to ?c)
+            (cell_between_column_of ?to ?from ?c)
+          )
         )
+      )
         (not (= ?from ?to))
         (forall
           (?c - cell)

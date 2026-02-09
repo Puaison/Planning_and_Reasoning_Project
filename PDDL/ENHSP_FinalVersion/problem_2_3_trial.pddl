@@ -37,27 +37,6 @@
     (cell_adj_to_the_right_of c_2_2 c_2_3)
     (cell_adj_to_the_left_of c_2_3 c_2_2)
 
-    ; Cells on same row
-    (cells_on_same_row c_1_1 c_1_2)
-    (cells_on_same_row c_1_1 c_1_3)
-    (cells_on_same_row c_1_2 c_1_1)
-    (cells_on_same_row c_1_2 c_1_3)
-    (cells_on_same_row c_1_3 c_1_1)
-    (cells_on_same_row c_1_3 c_1_2)
-    (cells_on_same_row c_2_1 c_2_2)
-    (cells_on_same_row c_2_1 c_2_3)
-    (cells_on_same_row c_2_2 c_2_1)
-    (cells_on_same_row c_2_2 c_2_3)
-    (cells_on_same_row c_2_3 c_2_1)
-    (cells_on_same_row c_2_3 c_2_2)
-
-    ; Cells on same column
-    (cells_on_same_column c_1_1 c_2_1)
-    (cells_on_same_column c_2_1 c_1_1)
-    (cells_on_same_column c_1_2 c_2_2)
-    (cells_on_same_column c_2_2 c_1_2)
-    (cells_on_same_column c_1_3 c_2_3)
-    (cells_on_same_column c_2_3 c_1_3)
 
     ; Cells between others on same row
     (cell_between_row_of c_1_1 c_1_3 c_1_2)

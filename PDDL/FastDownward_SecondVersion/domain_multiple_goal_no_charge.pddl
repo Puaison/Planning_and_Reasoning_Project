@@ -1,4 +1,4 @@
-(define (domain ricochet_robot_fastdownward_no_charge_second_version)
+(define (domain ricochet_robot_fastdownward_no_charge_second_version_previous)
 
   (:requirements :derived-predicates :adl :equality :typing
   )

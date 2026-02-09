@@ -1,5 +1,5 @@
-(define (problem tre)
-    (:domain ricochet_robot_fastdownward_no_charge)
+(define (problem 10_10_multiple_goals_no_order_no_charge)
+    (:domain ricochet_robot_fastdownward_no_charge_first_version)
     (:objects
         red black blue green - robot
         ; Grid cells cij, where i is row index and j is column index
@@ -2265,8 +2265,8 @@
         (visited blue c87)
         (visited green c73)
 
-        (visit_before red c33 c43)
-        (visit_before red c43 c1010)
+        ;(visit_before red c33 c43)
+        ;(visit_before red c43 c1010)
 
     )
 

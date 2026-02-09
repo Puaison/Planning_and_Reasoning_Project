@@ -48,15 +48,15 @@
             (cell_adj_to_the_right_of ?to ?c)
           )))
 
-      ;This is the inline version of the derived predicates that verifies if the path between the cells "?from" and "?to" is free from any type of obstacle
+      ;This is the inline version of the derived predicates that verifies if the path between "?from" and "?to" is in the same row, in the direction "right" and it is free from any type of obstacle
       (and
         (cell_aligned_to_the_right_of ?from ?to) ;The cell "?to" is on the right side of the cell "?from" and in the same row
         (not (= ?from ?to))
 
-        (forall ;For all the cells "?c" that are between "?from" and "?to",it must be free from any obstacle to allow the slide action
+        (forall ;For all the cells "?c" that are between "?from" and "?to" ("?to" included) in the same row, it must be free from any obstacle to allow the slide action
           (?c - cell)
           (or
-            (not (and ;If the cell "?c" is between "?from" and "?to" it IMPLIES that...
+            (not (and ;If the cell "?c" is between "?from" and "?to" ("?to" included) it IMPLIES that...
                 (cell_aligned_to_the_right_of ?from ?c)
                 (not (cell_aligned_to_the_right_of ?to ?c))
               ))
@@ -97,15 +97,15 @@
             (cell_adj_to_the_bottom_of ?to ?c)
           )))
 
-      ;This is the inline version of the derived predicates that verifies if the path between the cells "?from" and "?to" is free from any type of obstacle
+      ;This is the inline version of the derived predicates that verifies if the path between "?from" and "?to" is in the same column, in the direction "down" and it is free from any type of obstacle
       (and
         (cell_aligned_to_the_bottom_of ?from ?to) ;The cell "?to" is below the cell "?from" and in the same column
         (not (= ?from ?to))
 
-        (forall ;For all the cells "?c" that are between "?from" and "?to",it must be free from any obstacle to allow the slide action
+        (forall ;For all the cells "?c" that are between "?from" and "?to" ("?to" included) in the same column, it must be free from any obstacle to allow the slide action
           (?c - cell)
           (or
-            (not (and ;If the cell "?c" is between "?from" and "?to" it IMPLIES that...
+            (not (and ;If the cell "?c" is between "?from" and "?to" ("?to" included) it IMPLIES that...
                 (cell_aligned_to_the_bottom_of ?from ?c)
                 (not (cell_aligned_to_the_bottom_of ?to ?c))
               ))
@@ -146,15 +146,15 @@
             (cell_adj_to_the_top_of ?to ?c)
           )))
 
-      ;This is the inline version of the derived predicates that verifies if the path between the cells "?from" and "?to" is free from any type of obstacle
+      ;This is the inline version of the derived predicates that verifies if the path between "?from" and "?to" is in the same column, in the direction "up" and it is free from any type of obstacle
       (and
         (cell_aligned_to_the_top_of ?from ?to) ;The cell "?to" is above the cell "?from" and in the same column
         (not (= ?from ?to))
 
-        (forall ;For all the cells "?c" that are between "?from" and "?to",it must be free from any obstacle to allow the slide action
+        (forall ;For all the cells "?c" that are between "?from" and "?to" ("?to" included) in the same column, it must be free from any obstacle to allow the slide action
           (?c - cell)
           (or
-            (not (and ;If the cell "?c" is between "?from" and "?to" it IMPLIES that...
+            (not (and ;If the cell "?c" is between "?from" and "?to" ("?to" included) it IMPLIES that...
                 (cell_aligned_to_the_top_of ?from ?c)
                 (not (cell_aligned_to_the_top_of ?to ?c))
               ))
@@ -195,15 +195,15 @@
             (cell_adj_to_the_left_of ?to ?c)
           )))
 
-      ;This is the inline version of the derived predicates that verifies if the path between the cells "?from" and "?to" is free from any type of obstacle
+      ;This is the inline version of the derived predicates that verifies if the path between "?from" and "?to" is in the same row, in the direction "left" and it is free from any type of obstacle
       (and
         (cell_aligned_to_the_left_of ?from ?to) ;The cell "?to" is on the left side of the cell "?from" and in the same row
         (not (= ?from ?to))
 
-        (forall ;For all the cells "?c" that are between "?from" and "?to",it must be free from any obstacle to allow the slide action
+        (forall ;For all the cells "?c" that are between "?from" and "?to" ("?to" included) in the same row, it must be free from any obstacle to allow the slide action
           (?c - cell)
           (or
-            (not (and ;If the cell "?c" is between "?from" and "?to" it IMPLIES that...
+            (not (and ;If the cell "?c" is between "?from" and "?to" ("?to" included) it IMPLIES that...
                 (cell_aligned_to_the_left_of ?from ?c)
                 (not (cell_aligned_to_the_left_of ?to ?c))
               ))

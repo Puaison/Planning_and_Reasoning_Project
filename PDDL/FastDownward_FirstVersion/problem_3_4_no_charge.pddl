@@ -1,5 +1,5 @@
 (define (problem due)
-	(:domain ricochet_robot_fastdownward_no_charge)
+	(:domain ricochet_robot_fastdownward_no_charge_first_version)
 	(:objects
 		red black - robot
 		; Grid cells cij, where i is row index and j is coloumn index

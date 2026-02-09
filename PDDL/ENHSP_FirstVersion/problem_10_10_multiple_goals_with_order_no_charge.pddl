@@ -1,4 +1,4 @@
-(define (problem problem_10_10_multiple_goals_with_order_no_charge)
+(define (problem no_charge)
     (:domain ricochet_robot_enhsp_no_charge_first_version)
     (:objects
         red black blue green - robot

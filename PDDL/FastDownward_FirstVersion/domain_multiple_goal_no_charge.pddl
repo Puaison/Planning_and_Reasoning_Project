@@ -1,4 +1,4 @@
-(define (domain ricochet_robot_fastdownward_no_charge)
+(define (domain ricochet_robot_fastdownward_no_charge_first_version)
 
   (:requirements :derived-predicates :adl :equality :typing
   )
@@ -24,74 +24,86 @@
     (cell_adj_to_the_right_of ?c1 - cell ?c2 - cell) ;cell c2 is on the right side of cell c1 and they are adjacent
     (cell_adj_to_the_left_of ?c1 - cell ?c2 - cell) ;cell c2 is on the left side of cell c1 and they are adjacent
 
-    (free_line_right ?from - cell ?to - cell)
-    (free_line_left ?from - cell ?to - cell)
-    (free_line_top ?from - cell ?to - cell)
-    (free_line_bottom ?from - cell ?to - cell)
+    (free_line_right ?from - cell ?to - cell) ;the path between "?from" and "?to" is in the same row, in the direction "right" and it is free from any type of obstacle
+    (free_line_left ?from - cell ?to - cell) ;the path between "?from" and "?to" is in the same row, in the direction "left" and it is free from any type of obstacle
+    (free_line_top ?from - cell ?to - cell) ;the path between "?from" and "?to" is in the same column, in the direction "up" and it is free from any type of obstacle
+    (free_line_bottom ?from - cell ?to - cell) ;the path between "?from" and "?to" is in the same column, in the direction "down" and it is free from any type of obstacle
 
     (visited ?r - robot ?c - cell) ;Robot r has visited cell c
     (visit_before ?r - robot ?c1 - cell ?c2 - cell) ;Robot r has to visit cell c1 before reaching cell c2
   )
 
+  ; This derived predicate is true if the path between "?from" and "?to" is in the same row, in the direction "right" and it is free from any type of obstacle
   (:derived
     (free_line_right ?from - cell ?to - cell)
     (and
-      (cell_aligned_to_the_right_of ?from ?to)
+      (cell_aligned_to_the_right_of ?from ?to) ;The cell "?to" is on the right side of the cell "?from" and in the same row
       (not (= ?from ?to))
-      (forall
+      (forall ;For all the cells "?c" that are between "?from" and "?to" ("?to" included) in the same row,it must be free from any obstacle to allow the slide action
         (?c - cell)
         (or
-          (not (and(cell_aligned_to_the_right_of ?from ?c)
+          (not (and ;If the cell "?c" is between "?from" and "?to" ("?to" included) it IMPLIES that...
+              (cell_aligned_to_the_right_of ?from ?c)
               (not(cell_aligned_to_the_right_of ?to ?c))))
-          (and(not (occupied ?c))
+          (and ;...the cell "?c" must be free from any obstacle (not occupied and no wall on the left side that can block the slide)
+            (not (occupied ?c))
             (not(wall_to_the_left_of ?c)))
         )
       ))
   )
 
+  ; This derived predicate is true if the path between "?from" and "?to" is in the same row, in the direction "left" and it is free from any type of obstacle
   (:derived
     (free_line_left ?from - cell ?to - cell)
     (and
-      (cell_aligned_to_the_left_of ?from ?to)
+      (cell_aligned_to_the_left_of ?from ?to) ;The cell "?to" is on the left side of the cell "?from" and in the same row
       (not (= ?from ?to))
-      (forall
+      (forall ;For all the cells "?c" that are between "?from" and "?to" ("?to" included) in the same row, it must be free from any obstacle to allow the slide action
         (?c - cell)
         (or
-          (not (and(cell_aligned_to_the_left_of ?from ?c)
+          (not (and ;If the cell "?c" is between "?from" and "?to" ("?to" included) it IMPLIES that...
+              (cell_aligned_to_the_left_of ?from ?c)
               (not(cell_aligned_to_the_left_of ?to ?c))))
-          (and(not (occupied ?c))
+          (and ;...the cell "?c" must be free from any obstacle (not occupied and no wall on the right side that can block the slide)
+            (not (occupied ?c))
             (not(wall_to_the_right_of ?c)))
         )
       ))
   )
 
+  ; This derived predicate is true if the path between "?from" and "?to" is in the same column, in the direction "up" and it is free from any type of obstacle
   (:derived
     (free_line_top ?from - cell ?to - cell)
     (and
-      (cell_aligned_to_the_top_of ?from ?to)
+      (cell_aligned_to_the_top_of ?from ?to) ;The cell "?to" is above the cell "?from" and in the same column
       (not (= ?from ?to))
-      (forall
+      (forall ;For all the cells "?c" that are between "?from" and "?to" ("?to" included) in the same column, it must be free from any obstacle to allow the slide action
         (?c - cell)
         (or
-          (not (and(cell_aligned_to_the_top_of ?from ?c)
+          (not (and ;If the cell "?c" is between "?from" and "?to" ("?to" included) it IMPLIES that...
+              (cell_aligned_to_the_top_of ?from ?c)
               (not(cell_aligned_to_the_top_of ?to ?c))))
-          (and(not (occupied ?c))
+          (and ;...the cell "?c" must be free from any obstacle (not occupied and no wall on the bottom side that can block the slide)
+            (not (occupied ?c))
             (not(wall_to_the_bottom_of ?c)))
         )
       ))
   )
 
+  ; This derived predicate is true if the path between "?from" and "?to" is in the same column, in the direction "down" and it is free from any type of obstacle
   (:derived
     (free_line_bottom ?from - cell ?to - cell)
     (and
-      (cell_aligned_to_the_bottom_of ?from ?to)
+      (cell_aligned_to_the_bottom_of ?from ?to) ;The cell "?to" is below the cell "?from" and in the same column
       (not (= ?from ?to))
-      (forall
+      (forall ;For all the cells "?c" that are between "?from" and "?to" ("?to" included) in the same column, it must be free from any obstacle to allow the slide action
         (?c - cell)
         (or
-          (not (and(cell_aligned_to_the_bottom_of ?from ?c)
+          (not (and ;If the cell "?c" is between "?from" and "?to" ("?to" included) it IMPLIES that...
+              (cell_aligned_to_the_bottom_of ?from ?c)
               (not(cell_aligned_to_the_bottom_of ?to ?c))))
-          (and(not (occupied ?c))
+          (and ;...the cell "?c" must be free from any obstacle (not occupied and no wall on the top side that can block the slide)
+            (not (occupied ?c))
             (not(wall_to_the_top_of ?c)))
         )
       ))

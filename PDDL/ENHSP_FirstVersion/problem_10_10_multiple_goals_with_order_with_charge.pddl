@@ -1,4 +1,4 @@
-(define (problem problem_10_10_multiple_goals_with_order_with_charge)
+(define (problem charge)
     (:domain ricochet_robot_enhsp_with_charge_first_version)
     (:objects
         red black blue green - robot
@@ -2264,7 +2264,7 @@
         (= (battery_level black) 4)
         (= (battery_level blue) 4)
         (= (battery_level green) 4)
-        (= (necessary_battery_level) 0)
+        (= (necessary_battery_level) 1)
         (= (max_battery_level) 6)
 
         (visited red c11)
