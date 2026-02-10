@@ -2278,7 +2278,7 @@
 
     )
 
-    (:goal(and(visited red c33))
+    (:goal(and(visited red c58))
     )
     (:metric minimize
         (total-cost)
