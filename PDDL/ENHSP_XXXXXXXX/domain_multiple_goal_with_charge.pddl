@@ -1,4 +1,4 @@
-(define (domain ricochet_robot_enhsp_no_charge_first_version)
+(define (domain ricochet_robot_enhsp_with_charge_first_version)
 
   (:requirements :numeric-fluents :adl :equality :typing
   )
@@ -24,8 +24,17 @@
     (cell_adj_to_the_right_of ?c1 - cell ?c2 - cell) ;cell c2 is on the right side of cell c1 and they are adjacent
     (cell_adj_to_the_left_of ?c1 - cell ?c2 - cell) ;cell c2 is on the left side of cell c1 and they are adjacent
 
+    (charging_station_cell ?c - cell) ;In cell c there is a charging station
+
     (visited ?r - robot ?c - cell) ;Robot r has visited cell c
     (visit_before ?r - robot ?c1 - cell ?c2 - cell) ;Robot r has to visit cell c1 before reaching cell c2
+  )
+
+  (:functions
+    (total-cost) - number
+    (battery_level ?r - robot) - number
+    (max_battery_level) - number
+    (necessary_battery_level) - number
   )
 
   (:action slide_right ;move robot r by sliding right until an obstacle (like a robot) or a wall is reached
@@ -62,16 +71,18 @@
                 (cell_aligned_to_the_right_of ?from ?c)
                 (not (cell_aligned_to_the_right_of ?to ?c))
               ))
-            (and ;...the cell "?c" must be free from any obstacle (not occupied and no wall on the left side that can block the slide)
+            (and ;...the cell "?c" must be free from any obstacle (not occupied and no wall on the left and right side that can block the slide)
               (not (occupied ?c))
+              (not (wall_to_the_right_of ?c))
               (not (wall_to_the_left_of ?c))
             ))))
-      
+
       (cell_aligned_to_the_right_of ?from ?to) ;"?to" cell is on the right side of the "?from" cell and in the same row
       (not (wall_to_the_right_of ?from)) ;there is no wall to the right of the "?from" cell that can block the slide action at the beginning of the movement
       (not(occupied ?to)) ;"?to" cell is not occupied
 
       (robot_at ?r ?from) ;robot r is at cell "?from"
+      (>= (battery_level ?r) (necessary_battery_level)) ;The robot r has enough battery (necessary_battery_level) to execute the slide action
     )
     :effect (and ;the robot is no more in the "?from" cell and is now in the "?to" cell and the "?to" cell is now occupied and visited
       (not (robot_at ?r ?from))
@@ -79,6 +90,10 @@
       (robot_at ?r ?to)
       (occupied ?to)
       (visited ?r ?to)
+      (decrease
+        ;In order to perform the action, the robot r consumes energy equal to necessary_battery_level
+        (battery_level ?r)
+        (necessary_battery_level))
       (increase (total-cost) 1) ;increase the total cost of the plan by 1 unit
     )
   )
@@ -117,16 +132,18 @@
                 (cell_aligned_to_the_bottom_of ?from ?c)
                 (not (cell_aligned_to_the_bottom_of ?to ?c))
               ))
-            (and ;...the cell "?c" must be free from any obstacle (not occupied and no wall on the top side that can block the slide)
+            (and ;...the cell "?c" must be free from any obstacle (not occupied and no wall on the top and bottom side that can block the slide)
               (not (occupied ?c))
               (not (wall_to_the_top_of ?c))
+              (not (wall_to_the_bottom_of ?c))
             ))))
-
+      
       (cell_aligned_to_the_bottom_of ?from ?to) ;"?to" cell is below the "?from" cell and in the same column
       (not (wall_to_the_bottom_of ?from)) ;there is no wall to the bottom of the "?from" cell that can block the slide action at the beginning of the movement
       (not(occupied ?to)) ;"?to" cell is not occupied 
 
       (robot_at ?r ?from) ;robot r is at cell "?from"
+      (>= (battery_level ?r) (necessary_battery_level)) ;The robot r has enough battery (necessary_battery_level) to execute the slide action
     )
     :effect (and ;the robot is no more in the "?from" cell and is now in the "?to" cell and the "?to" cell is now occupied and visited
       (not (robot_at ?r ?from))
@@ -134,6 +151,10 @@
       (robot_at ?r ?to)
       (occupied ?to)
       (visited ?r ?to)
+      (decrease
+        ;In order to perform the action, the robot r consumes energy equal to necessary_battery_level
+        (battery_level ?r)
+        (necessary_battery_level))
       (increase (total-cost) 1) ;increase the total cost of the plan by 1 unit
     )
   )
@@ -172,8 +193,9 @@
                 (cell_aligned_to_the_top_of ?from ?c)
                 (not (cell_aligned_to_the_top_of ?to ?c))
               ))
-            (and ;...the cell "?c" must be free from any obstacle (not occupied and no wall on the bottom side that can block the slide)
+            (and ;...the cell "?c" must be free from any obstacle (not occupied and no wall on the bottom and top side that can block the slide)
               (not (occupied ?c))
+              (not (wall_to_the_top_of ?c))
               (not (wall_to_the_bottom_of ?c))
             ))))
 
@@ -182,6 +204,7 @@
       (not(occupied ?to)) ;"?to" cell is not occupied
 
       (robot_at ?r ?from) ;robot r is at cell "?from"
+      (>= (battery_level ?r) (necessary_battery_level)) ;The robot r has enough battery (necessary_battery_level) to execute the slide action
     )
     :effect (and ;the robot is no more in the "?from" cell and is now in the "?to" cell and the "?to" cell is now occupied and visited
       (not (robot_at ?r ?from))
@@ -189,6 +212,10 @@
       (robot_at ?r ?to)
       (occupied ?to)
       (visited ?r ?to)
+      (decrease
+        ;In order to perform the action, the robot r consumes energy equal to necessary_battery_level
+        (battery_level ?r)
+        (necessary_battery_level))
       (increase (total-cost) 1) ;increase the total cost of the plan by 1 unit
     )
   )
@@ -227,16 +254,18 @@
                 (cell_aligned_to_the_left_of ?from ?c)
                 (not (cell_aligned_to_the_left_of ?to ?c))
               ))
-            (and ;...the cell "?c" must be free from any obstacle (not occupied and no wall on the right side that can block the slide)
+            (and ;...the cell "?c" must be free from any obstacle (not occupied and no wall on the right and left side that can block the slide)
               (not (occupied ?c))
               (not (wall_to_the_right_of ?c))
+              (not (wall_to_the_left_of ?c))
             ))))
-      
+
       (cell_aligned_to_the_left_of ?from ?to) ;the cell "?to" is on the left side of the cell "?from" and in the same row
       (not (wall_to_the_left_of ?from)) ;there is no wall to the left of the "?from" cell that can block the slide action at the beginning of the movement
       (not(occupied ?to)) ;"?to" cell is not occupied
 
       (robot_at ?r ?from) ;robot r is at cell "?from"
+      (>= (battery_level ?r) (necessary_battery_level)) ;The robot r has enough battery (necessary_battery_level) to execute the slide action
     )
     :effect (and ;the robot is no more in the "?from" cell and is now in the "?to" cell and the "?to" cell is now occupied and visited
       (not (robot_at ?r ?from))
@@ -244,7 +273,22 @@
       (robot_at ?r ?to)
       (occupied ?to)
       (visited ?r ?to)
+      (decrease
+        ;In order to perform the action, the robot r consumes energy equal to necessary_battery_level
+        (battery_level ?r)
+        (necessary_battery_level))
       (increase (total-cost) 1) ;increase the total cost of the plan by 1 unit
+    )
+  )
+
+  (:action recharge ;recharge the battery of robot r of the amount "max_battery_level"
+    :parameters (?r - robot ?c - cell)
+    :precondition (and ;the robot r is in a cell that houses a charging station
+      (robot_at ?r ?c)
+      (charging_station_cell ?c)
+    )
+    :effect (and
+      (assign (battery_level ?r) (max_battery_level)) ;the battery level of robot r is set to max_battery_level
     )
   )
 
