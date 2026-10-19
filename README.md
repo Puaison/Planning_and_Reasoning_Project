@@ -4,7 +4,9 @@ This repository contains **PDDL** domains and problems developed for the *"Plann
 
 The project supports different planners, with a more complete modeling designed to run with **ENHSP**.
 
-It also has a formulation of the problem in **Indigolog**.
+The project also includes a formulation of the problem in **IndiGolog**, extended to handle reactive scenarios in which exogenous events may occur during the execution of an offline-computed plan, requiring the system to interrupt execution and re-plan online.
+
+The complete project documentation is available [here](https://github.com/Puaison/Planning_and_Reasoning_Project/blob/main/documentation.pdf), where a detailed explaination of the project's topic and use cases is given, along with a comparative analysis of the different solutions, heuristics and planners.
 
 ---
 
