@@ -1,7 +1,10 @@
 # Planning and Reasoning Project
 
-This repository contains PDDL domains and problems developed for a planning and reasoning project.
+This repository contains **PDDL** domains and problems developed for the *"Planning and Reasoning"* course in the Master Degree of Artificial Intelligence and Robotics in *"La Sapienza"*.
+
 The project supports different planners, with a more complete modeling designed to run with **ENHSP**.
+
+It also has a formulation of the problem in **Indigolog**.
 
 ---
 
